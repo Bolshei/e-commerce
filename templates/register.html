@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="POST">
+    <label for="username">Username:</label>
+    <input type="text" name="username" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required>
+    <p>Password must be at least 8 characters long and contain at least one letter.</p>
+    <br>
+    <button type="submit">Register</button>
+</form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<script>
+document.getElementById('password').addEventListener('input', function() {
+    const password = this.value;
+    const message = document.getElementById('password-message');
+    if (password.length < 8) {
+        message.textContent = 'Password must be at least 8 characters long.';
+    } else if (!/[A-Za-z]/.test(password)) {
+        message.textContent = 'Password must contain at least one letter.';
+    } else {
+        message.textContent = '';
+    }
+});
+</script>
+{% endblock %}

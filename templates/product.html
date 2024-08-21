@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ product.name }}</h2>
+<p>Price: ${{ product.price }}</p>
+{% if product.image_filename %}
+    <img src="{{ url_for('static', filename='uploads/' + product.image_filename) }}" alt="{{ product.name }}">
+{% endif %}
+<a href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a>
+{% endblock %}
